@@ -32,6 +32,6 @@ clean:
 	rm -rf build libc.a libc.so test
 
 test: test.c $(RUNTIME_OBJ) libc.a
-	$(CC) -nostdlib -z noexecstack -o test -Iinclude build/crt0.o build/crti.o test.c libc.a build/crtn.o
+	$(CC) $(CFLAGS) -z noexecstack -o test -Iinclude build/crt0.o build/crti.o test.c libc.a build/crtn.o
 
 .PHONY: all clean
