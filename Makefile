@@ -1,6 +1,6 @@
+ASFLAGS:=-mnaked-reg -msyntax=intel
 CFLAGS:=-Wall -Wextra -std=c11 -O2 -nostdlib
 LDFLAGS:=-shared -nostdlib -z noexecstack
-ASFLAGS:=-mnaked-reg -msyntax=intel -g
 
 RUNTIME_SRC:=src/crt0.s src/crti.s src/crtn.s
 RUNTIME_OBJ:=$(subst src/,build/,$(RUNTIME_SRC:.s=.o))
