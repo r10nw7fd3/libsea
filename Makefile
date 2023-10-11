@@ -1,5 +1,5 @@
 ASFLAGS:=-mnaked-reg -msyntax=intel
-CFLAGS:=-Wall -Wextra -std=c11 -O2 -nostdlib
+CFLAGS:=-Wall -Wextra -std=c11 -O2 -nostdlib -Iinclude
 LDFLAGS:=-shared -nostdlib -z noexecstack
 
 RUNTIME_SRC:=src/crt0.s src/crti.s src/crtn.s
