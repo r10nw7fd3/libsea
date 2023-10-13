@@ -3,6 +3,7 @@
 
 #include <__nomangle.h>
 #include <stddef.h>
+#include <sys/types.h>
 
 #define _POSIX_VERSION 200809L
 #define _XOPEN_VERSION 700
