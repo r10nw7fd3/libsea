@@ -8,6 +8,7 @@
 #define _POSIX_VERSION 200809L
 #define _XOPEN_VERSION 700
 
+NOMANGLE pid_t getpid(void);
 NOMANGLE ssize_t write(int, const void *, size_t);
 
 #endif
