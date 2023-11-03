@@ -5,5 +5,6 @@ typedef long ssize_t;
 typedef int pid_t;
 typedef int uid_t;
 typedef int gid_t;
+typedef unsigned long long off_t;
 
 #endif
