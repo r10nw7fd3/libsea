@@ -29,7 +29,11 @@ libc.so: $(LIB_OBJ)
 	$(CC) $(LDFLAGS) -o $@ $(LIB_OBJ)
 
 $(RUNTIME_OBJ): | build/arch/$(ARCH)
-$(LIB_OBJ): | build/arch/$(ARCH) build/portable
+$(LIB_OBJ): | include build/arch/$(ARCH) build/portable
+
+include:
+	cp -r portable/include .
+	cp -r arch/$(ARCH)/include/* include
 
 build/arch/$(ARCH):
 	mkdir -p $@
@@ -44,7 +48,7 @@ build/portable/%.o: portable/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf build libc.a libc.so test
+	rm -rf build include libc.a libc.so test
 
 test: test.c $(RUNTIME_OBJ) libc.a
 	$(CC) $(CFLAGS) -z noexecstack -o test -Iinclude build/arch/$(ARCH)/crt0.o build/arch/$(ARCH)/crti.o test.c libc.a build/arch/$(ARCH)/crtn.o

@@ -15,6 +15,6 @@
 NOMANGLE pid_t getpid(void);
 NOMANGLE uid_t getuid(void);
 NOMANGLE gid_t getgid(void);
-NOMANGLE ssize_t write(int, const void *, size_t);
+NOMANGLE ssize_t write(int, const void*, size_t);
 
 #endif
