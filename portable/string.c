@@ -39,3 +39,13 @@ int strcmp(const char* s1, const char* s2) {
 	for(; *s1 && *s2 && *s1 == *s2; ++s1, ++s2);
 	return *s1 - *s2;
 }
+
+void* memset(void* s, int c, size_t n) {
+	void* ret = s;
+	unsigned char* buf = s;
+
+	while(n--)
+		*buf++ = (unsigned char) c;
+
+	return ret;
+}
