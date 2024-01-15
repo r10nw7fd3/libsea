@@ -51,6 +51,6 @@ clean:
 	rm -rf build include libc.a libc.so test
 
 test: test.c $(RUNTIME_OBJ) libc.a
-	$(CC) $(CFLAGS) -z noexecstack -o test -Iinclude build/arch/$(ARCH)/crt0.o build/arch/$(ARCH)/crti.o test.c libc.a build/arch/$(ARCH)/crtn.o
+	$(CC) $(CFLAGS) -fno-stack-protector -z noexecstack -o test -Iinclude build/arch/$(ARCH)/crt0.o build/arch/$(ARCH)/crti.o test.c libc.a build/arch/$(ARCH)/crtn.o
 
 .PHONY: all clean crt
