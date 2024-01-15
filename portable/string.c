@@ -27,3 +27,15 @@ char* strchr(const char* s, int c) {
 
 	return NULL;
 }
+
+int memcmp(const void* str1, const void* str2, size_t n) {
+	const unsigned char* s1 = str1;
+	const unsigned char* s2 = str2;
+	for(; n-- && *s1 == *s2; ++s1, ++s2);
+	return *s1 - *s2;
+}
+
+int strcmp(const char* s1, const char* s2) {
+	for(; *s1 && *s2 && *s1 == *s2; ++s1, ++s2);
+	return *s1 - *s2;
+}
