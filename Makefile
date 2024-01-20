@@ -6,7 +6,7 @@ $(error Unsupported architecture $(ARCH))
 endif
 
 ASFLAGS:=-mnaked-reg -msyntax=intel
-CFLAGS:=-Wall -Wextra -std=c11 -O2 -nostdlib -Iinclude -fno-builtin
+CFLAGS:=-Wall -Wextra -std=c11 -O2 -nostdlib -Iinclude -fno-builtin -fPIC
 LDFLAGS:=-shared -nostdlib -z noexecstack
 
 RUNTIME_SRC:=arch/$(ARCH)/crt0.S arch/$(ARCH)/crti.S arch/$(ARCH)/crtn.S
