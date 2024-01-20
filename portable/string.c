@@ -49,3 +49,13 @@ void* memset(void* s, int c, size_t n) {
 
 	return ret;
 }
+
+char* strrchr(const char* s, int c) {
+	const char* start = s;
+	while(*s++);
+	for(; s != start; --s)
+		if(*s == (char) c)
+			return (char*) s;
+
+	return NULL;
+}
