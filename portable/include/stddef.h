@@ -1,7 +1,7 @@
 #ifndef __LIBSEA_STDDEF_H__
 #define __LIBSEA_STDDEF_H__
 
-typedef unsigned long size_t;
+#include <__stddef.h>
 
 #define NULL ((void*) 0)
 
