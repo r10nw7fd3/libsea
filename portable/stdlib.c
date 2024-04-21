@@ -1,8 +1,9 @@
 #include <signal.h>
 #include <sys/syscall.h>
-#include <stddef.h>
-#include <ctype.h>
 #include <sys/mman.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <ctype.h>
 
 _Noreturn void _Exit(int status) {
 	syscall(SYS_exit, status);
@@ -15,8 +16,23 @@ _Noreturn void abort(void) {
 }
 
 void* malloc(size_t size) {
-	void* ret = mmap(NULL, size, PROT_EXEC | PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	return ret == MAP_FAILED ? NULL : ret;
+	size_t actual_size = size + sizeof(size_t);
+	void* actual_addr = mmap(NULL, actual_size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if(actual_addr == MAP_FAILED)
+		return NULL;
+
+	*(size_t*) actual_addr = size;
+	void* user_addr = (uint8_t*) actual_addr + sizeof(size_t);
+	return user_addr;
+}
+
+void free(void* ptr) {
+	if(!ptr)
+		return;
+
+	void* actual_addr = (uint8_t*) ptr - sizeof(size_t);
+	size_t actual_size = *(size_t*) actual_addr + sizeof(size_t);
+	munmap(actual_addr, actual_size);
 }
 
 #define ATOI_FOR_TYPE(type, name) \
