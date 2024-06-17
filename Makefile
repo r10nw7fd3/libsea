@@ -9,14 +9,13 @@ ASFLAGS:=-mnaked-reg -msyntax=intel
 CFLAGS:=-Wall -Wextra -std=c11 -O2 -nostdlib -Iinclude -fno-builtin -fPIC
 LDFLAGS:=-shared -nostdlib -z noexecstack
 
-RUNTIME_SRC:=arch/$(ARCH)/crt0.S arch/$(ARCH)/crti.S arch/$(ARCH)/crtn.S
-RUNTIME_OBJ:=$(subst arch/,build/arch/,$(RUNTIME_SRC:.S=.o))
+RUNTIME_SRC:=$(ARCH)/crt0.S $(ARCH)/crti.S $(ARCH)/crtn.S
+RUNTIME_OBJ:=$(foreach e,$(RUNTIME_SRC:.S=.o),build/$e)
 
-LIB_SRC:=$(filter-out $(RUNTIME_SRC),$(wildcard arch/$(ARCH)/*.S)) $(wildcard portable/*.c)
+LIB_SRC:=$(filter-out $(RUNTIME_SRC),$(wildcard $(ARCH)/*.S)) $(wildcard common/*.c)
 LIB_OBJ:=$(subst .S,.o,$(LIB_SRC))
 LIB_OBJ:=$(subst .c,.o,$(LIB_OBJ))
-LIB_OBJ:=$(subst arch/,build/arch/,$(LIB_OBJ))
-LIB_OBJ:=$(subst portable/,build/portable/,$(LIB_OBJ))
+LIB_OBJ:=$(foreach e,$(LIB_OBJ),build/$e)
 
 all: crt libc.a libc.so
 
@@ -28,29 +27,29 @@ libc.a: $(LIB_OBJ)
 libc.so: $(LIB_OBJ)
 	$(CC) $(LDFLAGS) -o $@ $(LIB_OBJ)
 
-$(RUNTIME_OBJ): | build/arch/$(ARCH)
-$(LIB_OBJ): | include build/arch/$(ARCH) build/portable
+$(RUNTIME_OBJ): | build/$(ARCH)
+$(LIB_OBJ): | include build/$(ARCH) build/common
 
 include:
-	cp -r portable/include .
-	cp -r arch/$(ARCH)/include/* include
+	cp -r common/include .
+	cp -r $(ARCH)/include/* include
 
-build/arch/$(ARCH):
+build/$(ARCH):
 	mkdir -p $@
 
-build/portable:
+build/common:
 	mkdir -p $@
 
-build/arch/$(ARCH)/%.o: arch/$(ARCH)/%.S
+build/$(ARCH)/%.o: $(ARCH)/%.S
 	$(AS) $(ASFLAGS) -o $@ $<
 
-build/portable/%.o: portable/%.c
+build/common/%.o: common/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	rm -rf build include libc.a libc.so test
 
 test: test.c $(RUNTIME_OBJ) libc.a
-	$(CC) $(CFLAGS) -fno-stack-protector -z noexecstack -o test -Iinclude build/arch/$(ARCH)/crt0.o build/arch/$(ARCH)/crti.o test.c libc.a build/arch/$(ARCH)/crtn.o
+	$(CC) $(CFLAGS) -fno-stack-protector -z noexecstack -o test -Iinclude build/$(ARCH)/crt0.o build/$(ARCH)/crti.o test.c libc.a build/$(ARCH)/crtn.o
 
 .PHONY: all clean crt
