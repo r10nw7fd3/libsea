@@ -2,9 +2,9 @@
 #define __LIBSEA_SETJMP_H__
 
 #include <__setjmp.h>
-#include <__nomangle.h>
+#include <__visibility.h>
 
-NOMANGLE int setjmp(jmp_buf env);
-NOMANGLE _Noreturn void longjmp(jmp_buf env, int val);
+__LIBSEA_API int setjmp(jmp_buf env);
+__LIBSEA_API _Noreturn void longjmp(jmp_buf env, int val);
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef __LIBSEA_SYSCALL_H__
 #define __LIBSEA_SYSCALL_H__
 
-#include <__nomangle.h>
+#include <__visibility.h>
 
 // https://filippo.io/linux-syscall-table/
 
@@ -308,6 +308,6 @@
 #define SYS_kcmp 312
 #define SYS_finit_module 313
 
-NOMANGLE long syscall(long number, ...);
+__LIBSEA_API long syscall(long number, ...);
 
 #endif

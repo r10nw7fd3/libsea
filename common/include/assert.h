@@ -1,7 +1,6 @@
 #ifndef __LIBSEA_ASSERT_H__
 #define __LIBSEA_ASSERT_H__
 
-#include <stdlib.h>
 #include <string.h>
 #include <sys/syscall.h>
 

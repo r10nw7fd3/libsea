@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <signal.h>
 #include <sys/syscall.h>
 #include <sys/mman.h>
