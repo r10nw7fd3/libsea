@@ -1,7 +1,7 @@
 #ifndef __LIBSEA_MMAN_H__
 #define __LIBSEA_MMAN_H__
 
-#include <__visibility.h>
+#include <__nomangle.h>
 #include <stddef.h>
 #include <sys/types.h>
 
@@ -36,7 +36,7 @@
 #define MAP_SYNC 0x080000
 #define MAP_UNINITIALIZED 0x4000000
 
-__LIBSEA_API void* mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset);
-__LIBSEA_API int munmap(void* addr, size_t length);
+NOMANGLE void* mmap(void* addr, size_t length, int prot, int flags, int fd, off_t offset);
+NOMANGLE int munmap(void* addr, size_t length);
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef __LIBSEA_UNISTD_H__
 #define __LIBSEA_UNISTD_H__
 
-#include <__visibility.h>
+#include <__nomangle.h>
 #include <stddef.h>
 #include <sys/types.h>
 
@@ -12,9 +12,9 @@
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2
 
-__LIBSEA_API pid_t getpid(void);
-__LIBSEA_API uid_t getuid(void);
-__LIBSEA_API gid_t getgid(void);
-__LIBSEA_API ssize_t write(int, const void*, size_t);
+NOMANGLE pid_t getpid(void);
+NOMANGLE uid_t getuid(void);
+NOMANGLE gid_t getgid(void);
+NOMANGLE ssize_t write(int, const void*, size_t);
 
 #endif

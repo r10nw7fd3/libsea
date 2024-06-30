@@ -1,4 +1,3 @@
-#include <signal.h>
 #include <sys/syscall.h>
 #include <unistd.h>
 

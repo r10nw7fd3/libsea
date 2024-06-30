@@ -2,7 +2,7 @@
 #define __LIBSEA_STDIO_H__
 
 #include <stddef.h>
-#include <__visibility.h>
+#include <__nomangle.h>
 
 #define EOF -1
 #define FILENAME_MAX 4096
@@ -21,6 +21,6 @@ extern FILE* stdin;
 extern FILE* stdout;
 extern FILE* stderr;
 
-__LIBSEA_API int fputc(int c, FILE* stream);
+NOMANGLE int fputc(int c, FILE* stream);
 
 #endif

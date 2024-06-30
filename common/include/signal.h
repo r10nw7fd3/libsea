@@ -1,7 +1,7 @@
 #ifndef __LIBSEA_SIGNAL_H__
 #define __LIBSEA_SIGNAL_H__
 
-#include <__visibility.h>
+#include <__nomangle.h>
 #include <sys/types.h>
 
 #define SIGHUP 1
@@ -38,7 +38,7 @@
 #define SIGSYS 31
 #define SIGUNUSED 31
 
-__LIBSEA_API int kill(pid_t pid, int sig);
-__LIBSEA_API int raise(int sig);
+NOMANGLE int kill(pid_t pid, int sig);
+NOMANGLE int raise(int sig);
 
 #endif

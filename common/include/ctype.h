@@ -1,16 +1,16 @@
 #ifndef __LIBSEA_CTYPE_H__
 #define __LIBSEA_CTYPE_H__
 
-#include <__visibility.h>
+#include <__nomangle.h>
 
-__LIBSEA_API int islower(int c);
-__LIBSEA_API int isupper(int c);
-__LIBSEA_API int isalpha(int c);
-__LIBSEA_API int iscntrl(int c);
-__LIBSEA_API int isdigit(int c);
-__LIBSEA_API int isalnum(int c);
-__LIBSEA_API int isspace(int c);
-__LIBSEA_API int isblank(int c);
-__LIBSEA_API int isgraph(int c);
+NOMANGLE int islower(int c);
+NOMANGLE int isupper(int c);
+NOMANGLE int isalpha(int c);
+NOMANGLE int iscntrl(int c);
+NOMANGLE int isdigit(int c);
+NOMANGLE int isalnum(int c);
+NOMANGLE int isspace(int c);
+NOMANGLE int isblank(int c);
+NOMANGLE int isgraph(int c);
 
 #endif
